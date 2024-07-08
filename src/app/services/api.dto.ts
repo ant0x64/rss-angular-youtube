@@ -52,4 +52,5 @@ export interface ItemListDto extends EntityDto {
     totalResults: number;
     resultsPerPage: number;
   };
+  items: VideoDto[];
 }

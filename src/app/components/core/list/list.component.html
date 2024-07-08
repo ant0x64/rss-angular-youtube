@@ -1,3 +1,9 @@
-@for (item of items; track $index) {
-  <app-item [data]="item"/>
-}
+
+
+<mat-grid-list cols="4" rowHeight="263:327">
+  @for (item of items; track $index) {
+  <mat-grid-tile>
+    <app-item [data]="item"/>
+  </mat-grid-tile>
+  }
+</mat-grid-list>

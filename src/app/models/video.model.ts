@@ -1,1 +1,3 @@
-export interface VideoInterface {}
+import { VideoDto } from '@/services/api.dto';
+
+export interface VideoInterface extends VideoDto {}

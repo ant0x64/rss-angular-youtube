@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+
 import { ItemComponent } from '@/components/core/item/item.component';
 
 import { VideoInterface } from '@/models/video.model';
@@ -8,8 +10,11 @@ import { VideoInterface } from '@/models/video.model';
   standalone: true,
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
-  imports: [ItemComponent],
+  imports: [ItemComponent, MatGridList, MatGridTile],
 })
-export class ListComponent {
+export class ListComponent implements OnChanges {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
   @Input() items: VideoInterface[] = [];
 }

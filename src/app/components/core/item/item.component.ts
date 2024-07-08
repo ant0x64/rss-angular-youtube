@@ -1,10 +1,12 @@
 import { Component, Input } from '@angular/core';
+import { NgIf } from '@angular/common';
+
 import { VideoInterface } from '@/models/video.model';
 
 @Component({
   selector: 'app-item',
   standalone: true,
-  imports: [],
+  imports: [NgIf],
   templateUrl: './item.component.html',
   styleUrl: './item.component.scss',
 })
