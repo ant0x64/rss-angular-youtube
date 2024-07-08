@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { VideoInterface } from '@/models/video.model';
 
 @Component({
   selector: 'app-item',
@@ -8,5 +9,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './item.component.scss',
 })
 export class ItemComponent {
-  @Input() data: unknown;
+  @Input() data: VideoInterface | undefined;
 }

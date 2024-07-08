@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { ItemComponent } from '@/components/core/item/item.component';
 
+import { VideoInterface } from '@/models/video.model';
+
 @Component({
   selector: 'app-list',
   standalone: true,
@@ -9,5 +11,5 @@ import { ItemComponent } from '@/components/core/item/item.component';
   imports: [ItemComponent],
 })
 export class ListComponent {
-  @Input() items: unknown[] = [];
+  @Input() items: VideoInterface[] = [];
 }
