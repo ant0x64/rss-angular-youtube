@@ -7,6 +7,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'search'
-  }
+    redirectTo: 'search',
+    pathMatch: 'full',
+  },
 ];

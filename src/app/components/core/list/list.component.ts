@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { ItemComponent } from '@/components/item/item.component';
+import { ItemComponent } from '@/components/core/item/item.component';
 
 @Component({
-  selector: 'app-component-list',
+  selector: 'app-list',
   standalone: true,
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
   imports: [ItemComponent],
 })
 export class ListComponent {
-  @Input() private items: unknown[] = [];
+  @Input() items: unknown[] = [];
 }

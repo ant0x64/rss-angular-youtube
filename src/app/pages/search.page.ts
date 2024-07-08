@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ListComponent } from '@/components/list/list.component';
+import { ListComponent } from '@/components/core/list/list.component';
 
 @Component({
   selector: 'app-page-search',
