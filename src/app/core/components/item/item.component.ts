@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NgIf } from '@angular/common';
 
-import { VideoInterface } from '@/models/video.model';
+import { VideoInterface } from '@/core/models/video.model';
 
 @Component({
   selector: 'app-item',

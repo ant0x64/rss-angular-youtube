@@ -1,6 +1,6 @@
 
 
-<mat-grid-list cols="4" rowHeight="263:327">
+<mat-grid-list [cols]="config.columns" rowHeight="28:33">
   @for (item of items; track $index) {
   <mat-grid-tile>
     <app-item [data]="item"/>

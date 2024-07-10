@@ -1,0 +1,40 @@
+<form>
+  <mat-form-field>
+    <input matNativeControl placeholder="Search..." name="term" #term>
+  </mat-form-field>
+  <app-button (click)="search(term.value)" [disabled]="loading">Search</app-button>
+  <app-button (click)="toggleSortOrderVisibility()">
+    <mat-icon>{{ !isSortOrderVisible? 'tune' : 'close' }}</mat-icon>
+  </app-button>
+  <div class="sorting" *ngIf="isSortOrderVisible">
+    <section>
+      <p>
+        Sorting by:
+        <mat-button-toggle-group 
+        ngDefaultControl [value]="sortOrder$ | async" (change)="setOrder($event.value)"
+        name="sort-order" aria-label="Sorting by">
+          <mat-button-toggle *ngFor="let option of sortOrderOptions" [value]="option">
+            @switch (option) {
+              @case ('date') {
+                Date
+              }
+              @case ('views') {
+                Count of Views
+              }
+              @default {
+                {{ option }}
+              }
+            }
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+    </p>
+    </section>
+    <section>
+      <p>
+        Filter by text:
+        <input name="filter" #filter
+          ngDefaultControl [value]="filterTerm$ | async" (input)="setFilterTerm(filter.value)">
+      </p>
+    </section>
+  </div>
+</form>
