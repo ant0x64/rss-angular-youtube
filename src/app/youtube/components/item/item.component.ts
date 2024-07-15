@@ -4,7 +4,7 @@ import { NgIf } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { FlexModule } from '@angular/flex-layout';
 
-import { VideoInterface } from '@/core/models/video.model';
+import { VideoInterface } from '@/youtube/models/video.model';
 import { ButtonComponent } from '@/shared/components/button/button.component';
 import { PublicationStatusDirective } from '@/shared/directives/publication-status.directive';
 

@@ -3,8 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 
-import { ItemComponent } from '@/core/components/item/item.component';
-import { VideoInterface } from '@/core/models/video.model';
+import { ItemComponent } from '@/youtube/components/item/item.component';
+import { VideoInterface } from '@/youtube/models/video.model';
 
 @Component({
   selector: 'app-list',

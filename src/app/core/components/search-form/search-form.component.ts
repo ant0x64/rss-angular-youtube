@@ -17,9 +17,9 @@ import {
 } from '@angular/material/button-toggle';
 
 import { FlexModule } from '@angular/flex-layout';
-import { VideoInterface } from '@/core/models/video.model';
+import { VideoInterface } from '@/youtube/models/video.model';
 import { ButtonComponent } from '@/shared/components/button/button.component';
-import { ApiService } from '@/shared/services/api.service';
+import { ApiService } from '@/youtube/services/api.service';
 
 enum SortOrderOptions {
   DATE = 'date',

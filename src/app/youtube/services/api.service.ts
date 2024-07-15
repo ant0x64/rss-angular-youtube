@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
-import { VideoInterface } from '@/core/models/video.model';
+import { VideoInterface } from '@/youtube/models/video.model';
 import { ItemListDto } from './api.dto';
 
 @Injectable({

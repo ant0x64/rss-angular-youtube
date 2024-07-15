@@ -5,13 +5,13 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { ListComponent } from '@/core/components/list/list.component';
+import { ListComponent } from '@/youtube/components/list/list.component';
 import { HeaderComponent } from '@/core/components/header/header.component';
 import { SearchFormComponent } from '@/core/components/search-form/search-form.component';
 
-import { ApiService } from '@/shared/services/api.service';
-import { VideoInterface } from '@/core/models/video.model';
-import { ContainerWrapperComponent } from "../../shared/components/container/container-wrapper.component";
+import { ApiService } from '@/youtube/services/api.service';
+import { VideoInterface } from '@/youtube/models/video.model';
+import { ContainerWrapperComponent } from '@/shared/components/container/container-wrapper.component';
 
 @Component({
   selector: 'app-page-search',
