@@ -16,6 +16,7 @@ import {
   MatButtonToggleGroup,
 } from '@angular/material/button-toggle';
 
+import { FlexModule } from '@angular/flex-layout';
 import { VideoInterface } from '@/core/models/video.model';
 import { ButtonComponent } from '@/shared/components/button/button.component';
 import { ApiService } from '@/shared/services/api.service';
@@ -34,6 +35,7 @@ enum SortOrderOptions {
     NgClass,
     AsyncPipe,
     FormsModule,
+    FlexModule,
     ButtonComponent,
     MatIcon,
     MatInput,

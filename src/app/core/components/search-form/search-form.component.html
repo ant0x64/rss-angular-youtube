@@ -1,16 +1,20 @@
-<form>
-  <mat-form-field>
-    <input matNativeControl placeholder="Search..." name="term" #term>
-  </mat-form-field>
-  <app-button (click)="search(term.value)" [disabled]="loading">Search</app-button>
-  <app-button (click)="toggleSortOrderVisibility()">
-    <mat-icon>{{ !isSortOrderVisible? 'tune' : 'close' }}</mat-icon>
-  </app-button>
-  <div class="sorting" *ngIf="isSortOrderVisible">
-    <section>
+<form fxLayout="column" fxLayoutAlign="center top">
+  <div class="search-box" fxFlex="100%" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <fieldset fxFlex="100%">
+      <input matNativeControl placeholder="Search..." name="term" #term>
+      <app-button [shadowed]="true" (click)="search(term.value)" [disabled]="loading">
+        <mat-icon>search</mat-icon>
+      </app-button>
+    </fieldset>
+    <app-button (click)="toggleSortOrderVisibility()">
+      <mat-icon>{{ !isSortOrderVisible? 'tune' : 'close' }}</mat-icon>
+    </app-button>
+  </div>
+  <div fxFlex class="sorting-box" *ngIf="isSortOrderVisible">
+    <div>
       <p>
         Sorting by:
-        <mat-button-toggle-group 
+        <mat-button-toggle-group
         ngDefaultControl [value]="sortOrder$ | async" (change)="setOrder($event.value)"
         name="sort-order" aria-label="Sorting by">
           <mat-button-toggle *ngFor="let option of sortOrderOptions" [value]="option">
@@ -28,13 +32,13 @@
           </mat-button-toggle>
         </mat-button-toggle-group>
     </p>
-    </section>
-    <section>
+    </div>
+    <div>
       <p>
         Filter by text:
         <input name="filter" #filter
           ngDefaultControl [value]="filterTerm$ | async" (input)="setFilterTerm(filter.value)">
       </p>
-    </section>
+    </div>
   </div>
 </form>

@@ -1,1 +1,12 @@
-<ng-content></ng-content>
+<header>
+  <app-container>
+    <div fxLayout="row" fxLayoutAlign="center top" fxLayoutGap="10px">
+      <div fxFlex="50px">
+        <app-logo/>
+      </div>
+      <div fxFlex>
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </app-container>
+</header>

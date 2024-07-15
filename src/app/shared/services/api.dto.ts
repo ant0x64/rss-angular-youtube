@@ -27,7 +27,10 @@ export interface SnippetDto {
   channelId: string;
   title: string;
   description: string | null;
-  thumbnails: ThumbnailDto[];
+  thumbnails: {
+    default: ThumbnailDto,
+    medium: ThumbnailDto,
+  };
   channelTitle: string;
   tags: string[];
   categoryId: string;

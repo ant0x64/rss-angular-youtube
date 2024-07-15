@@ -1,0 +1,11 @@
+$container-max-width: 1240px;
+$container-padding: 20px;
+
+:host {
+  display: block;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+  width: 100%;
+  box-sizing: border-box;
+}

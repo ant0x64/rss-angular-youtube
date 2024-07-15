@@ -11,13 +11,14 @@ import { SearchFormComponent } from '@/core/components/search-form/search-form.c
 
 import { ApiService } from '@/shared/services/api.service';
 import { VideoInterface } from '@/core/models/video.model';
+import { ContainerWrapperComponent } from "../../shared/components/container/container-wrapper.component";
 
 @Component({
   selector: 'app-page-search',
   templateUrl: 'search.page.html',
   standalone: true,
   providers: [ApiService],
-  imports: [ListComponent, HeaderComponent, SearchFormComponent],
+  imports: [ListComponent, HeaderComponent, SearchFormComponent, ContainerWrapperComponent],
 })
 export class SearchPage implements AfterViewInit {
   constructor(private cd: ChangeDetectorRef) {}
