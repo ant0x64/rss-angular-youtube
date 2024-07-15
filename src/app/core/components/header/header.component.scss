@@ -1,0 +1,11 @@
+@use '@angular/material' as mat;
+
+header {
+  display: block;
+  background-color: var(--app-container-background);
+  padding: .25em .5em;
+
+  // app-container {
+  //   max-width: 800px;
+  // }
+}
