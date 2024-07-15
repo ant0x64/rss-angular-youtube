@@ -1,29 +1,76 @@
 :host {
-  display: block;
   width: 100%;
-  padding: 0.5em 0.5em 0.25em;
-  box-sizing: border-box;
-  background-color: var(--app-container-background);
+  height: 100%;
 }
 
-.statistics {
-  white-space: nowrap;
-  font-size: 0.85em;
-  padding: 0.5em 0;
-  margin-top: 0.5em;
+article {
+  display: flex;
+  flex-direction: column;
 
-  mat-icon {
-    font-size: 1.5em;
-    width: 1.15em;
-    height: 1em;
-    vertical-align: middle;
+  width: 100%;
+  padding: 0.75em 0.75em 1em;
+  box-sizing: border-box;
+  background-color: var(--app-container-background);
+
+  border-bottom: 5px solid #000000;
+  border-radius: 5px;
+
+  text-align: center;
+
+  width: 100%;
+  height: 100%;
+
+  &.status {
+    &-red {
+      border-color: var(--app-status-color-red);
+    }
+    &-yellow {
+      border-color: var(--app-status-color-yellow);
+    }
+    &-green {
+      border-color: var(--app-status-color-green);
+    }
+    &-blue {
+      border-color: var(--app-status-color-blue);
+    }
   }
 
-  > span {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  h3 {
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .image-container {
+    > img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .statistics {
+    white-space: nowrap;
+    font-size: 0.85em;
+    padding: 0.5em 0;
+    margin-top: 0.5em;
+
+    mat-icon {
+      font-size: 1.5em;
+      width: 1.15em;
+      height: 1em;
+      vertical-align: middle;
+    }
+
+    > span {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  app-button {
+    margin-top: auto;
   }
 }

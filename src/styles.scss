@@ -6,12 +6,21 @@
 :root {
   --app-container-background: #{map.get(theme.$neutral, 95)};
   --app-logo-height: 50px;
+  --app-status-color-red: #ba1a1a;
+  --app-status-color-yellow: #ffeb3b;
+  --app-status-color-green: #4caf50;
+  --app-status-color-blue: #2196f3;
+
 }
 
 html {
   @include mat.core();
   @include mat.all-component-themes(theme.$app-theme);
   @include mat.typography-hierarchy(theme.$app-theme);
+}
+
+main {
+  margin-top: 2em;
 }
 
 html,
