@@ -5,15 +5,30 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideRouter, withHashLocation } from '@angular/router';
+
 import { provideAnimations } from '@angular/platform-browser/animations';
+
+// STORE
+import { provideState, provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+
+import { reducer } from '@/store/reducers';
+import { Effects } from '@/store/effects';
+
+// APP
 
 import { routes } from '@/app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes, withHashLocation()),
-    provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
+    provideRouter(routes, withHashLocation()),
+
+    provideStore(),
+    provideState('app', reducer),
+    provideEffects(Effects),
+
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideAnimations(),
   ],
 };
