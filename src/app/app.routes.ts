@@ -10,4 +10,8 @@ export const routes: Routes = [
     redirectTo: 'search',
     pathMatch: 'full',
   },
+  {
+    path: '**',
+    loadComponent: () => import('./core/pages/not-found.page').then((m) => m.NotFoundPage),
+  },
 ];

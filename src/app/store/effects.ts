@@ -7,7 +7,10 @@ import {
   tap,
 } from 'rxjs';
 
+import { Router } from '@angular/router';
+
 import * as AppActions from './actions';
+
 import { ApiService } from '@/youtube/services/api.service';
 
 @Injectable({ providedIn: 'root' })
@@ -15,6 +18,7 @@ export class AppEffects {
   constructor(
     private actions$: Actions,
     private api: ApiService,
+    private router: Router,
   ) {}
 
   search$ = createEffect(() => {
@@ -24,9 +28,15 @@ export class AppEffects {
         return AppActions.appLoading({ loading: true });
       }),
       exhaustMap(({ term }) => {
-        return this.api.search(term).pipe(take(1), map((result) => {
-          return AppActions.youtubeSearchSuccess({ result });
-        }));
+        return this.api.search(term).pipe(
+          take(1),
+          tap(() => {
+            this.router.navigate(['/search']);
+          }),
+          map((result) => {
+            return AppActions.youtubeSearchSuccess({ result });
+          }),
+        );
       }),
     );
   });

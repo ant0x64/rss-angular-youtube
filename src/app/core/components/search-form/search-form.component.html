@@ -36,8 +36,8 @@
     <div>
       <p>
         Filter by text:
-        <input name="filter" #filter
-          ngDefaultControl (input)="setFilterTerm(filter.value)">
+        <input name="filter" #filter [value]="filter$ | async"
+          ngDefaultControl (input)="setFilter(filter.value)">
       </p>
     </div>
   </div>

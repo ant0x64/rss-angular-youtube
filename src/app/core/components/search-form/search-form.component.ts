@@ -23,9 +23,10 @@ import { FlexModule } from '@angular/flex-layout';
 import { Store } from '@ngrx/store';
 
 import { youtubeSearch, youtubeSetFilter, youtubeSetSortOrder } from '@/store/actions';
-import { ButtonComponent } from '@/shared/components/button/button.component';
+import { selectYoutubeFilter, selectYoutubeSortOrder } from '@/store/selectors';
+
 import { SortOrderOptions } from '@/youtube/services/api.service';
-import { selectYoutubeSortOrder } from '@/store/selectors';
+import { ButtonComponent } from '@/shared/components/button/button.component';
 
 @Component({
   selector: 'app-search-form',
@@ -52,11 +53,14 @@ export class SearchFormComponent implements AfterViewInit {
   isSortOrderVisible: boolean = false;
 
   @ViewChild('term') term!: ElementRef<HTMLInputElement>;
+  filter: string = '';
 
   sortOrder$: Observable<SortOrderOptions>;
+  filter$: Observable<string>;
 
   constructor(private store: Store) {
     this.sortOrder$ = this.store.select(selectYoutubeSortOrder);
+    this.filter$ = this.store.select(selectYoutubeFilter);
   }
 
   ngAfterViewInit(): void {
@@ -82,7 +86,7 @@ export class SearchFormComponent implements AfterViewInit {
     this.store.dispatch(youtubeSetSortOrder({ sortOrder }));
   }
 
-  setFilterTerm(filter: string) {
+  setFilter(filter: string) {
     this.store.dispatch(youtubeSetFilter({ filter }));
   }
 
