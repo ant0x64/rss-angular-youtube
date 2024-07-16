@@ -12,12 +12,12 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 
-import { reducer } from '@/store/reducers';
-import { Effects } from '@/store/effects';
+import { reducer } from './store/reducers';
+import { AppEffects } from './store/effects';
 
 // APP
 
-import { routes } from '@/app.routes';
+import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,7 +26,7 @@ export const appConfig: ApplicationConfig = {
 
     provideStore(),
     provideState('app', reducer),
-    provideEffects(Effects),
+    provideEffects(AppEffects),
 
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideAnimations(),

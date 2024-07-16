@@ -3,7 +3,7 @@
 </app-header>
 
 <main>
-  <app-container>
+  <app-container *ngIf="this.items$ | async; let items">
     <app-list [items]="items"/>
   </app-container>
 </main>

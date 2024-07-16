@@ -11,8 +11,11 @@ import * as AppActions from './actions';
 import { ApiService } from '@/youtube/services/api.service';
 
 @Injectable({ providedIn: 'root' })
-export class Effects {
-  constructor(private actions$: Actions, private api: ApiService) { }
+export class AppEffects {
+  constructor(
+    private actions$: Actions,
+    private api: ApiService,
+  ) {}
 
   search$ = createEffect(() => {
     return this.actions$.pipe(

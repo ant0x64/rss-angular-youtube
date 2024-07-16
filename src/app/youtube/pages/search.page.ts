@@ -1,42 +1,80 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 
+import { Store } from '@ngrx/store';
+import { combineLatest, map, Observable } from 'rxjs';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { ListComponent } from '@/youtube/components/list/list.component';
 import { HeaderComponent } from '@/core/components/header/header.component';
 import { SearchFormComponent } from '@/core/components/search-form/search-form.component';
 
-import { ApiService } from '@/youtube/services/api.service';
+import { ApiService, SortOrderOptions } from '@/youtube/services/api.service';
 import { VideoInterface } from '@/youtube/models/video.model';
 import { ContainerWrapperComponent } from '@/shared/components/container/container-wrapper.component';
+
+import {
+  selectYoutubeFilter,
+  selectYoutubeResult,
+  selectYoutubeSortOrder,
+} from '@/store/selectors';
 
 @Component({
   selector: 'app-page-search',
   templateUrl: 'search.page.html',
   standalone: true,
   providers: [ApiService],
-  imports: [ListComponent, HeaderComponent, SearchFormComponent, ContainerWrapperComponent],
+  imports: [
+    NgIf,
+    ListComponent,
+    HeaderComponent,
+    SearchFormComponent,
+    ContainerWrapperComponent,
+    AsyncPipe,
+  ],
 })
-export class SearchPage implements AfterViewInit {
-  constructor(private cd: ChangeDetectorRef) {}
+export class SearchPage {
+  protected items$: Observable<VideoInterface[]>;
 
-  @ViewChild(SearchFormComponent)
-  private searchForm: SearchFormComponent | undefined;
-
-  public items: VideoInterface[] = [];
-
-  ngAfterViewInit() {
-    if (!this.searchForm) {
-      throw new Error('The search form is not initialized');
-    }
-    this.searchForm.result$.subscribe(this.showResult.bind(this));
+  constructor(private cd: ChangeDetectorRef, private store: Store) {
+    this.items$ = combineLatest({
+      result: this.store.select(selectYoutubeResult),
+      sortOrder: this.store.select(selectYoutubeSortOrder),
+      filter: this.store.select(selectYoutubeFilter),
+    }).pipe(
+      map(({ result, sortOrder, filter }) => {
+        const items = Object.values(result.entities) as [];
+        return this.sortItems(this.filterItems(items, filter), sortOrder);
+      }),
+    );
   }
 
-  protected showResult(items: VideoInterface[]) {
-    this.items = [...items];
-    this.cd.markForCheck();
+  protected filterItems(items: VideoInterface[], term: string) {
+    return term.length
+      ? items.filter(
+        (item) => item.snippet.title
+          .toLocaleLowerCase()
+          .indexOf(term.toLocaleLowerCase()) !== -1,
+      )
+      : items;
+  }
+
+  protected sortItems(
+    items: VideoInterface[],
+    sortOrder: SortOrderOptions,
+  ): VideoInterface[] {
+    return items.sort((a, b) => {
+      if (sortOrder === SortOrderOptions.DATE) {
+        return (
+          new Date(a.snippet.publishedAt).getTime()
+          - new Date(b.snippet.publishedAt).getTime()
+        );
+      }
+      if (sortOrder === SortOrderOptions.VIEWS) {
+        return (
+          parseInt(a.statistics.viewCount, 10)
+          - parseInt(b.statistics.viewCount, 10)
+        );
+      }
+      return 0;
+    });
   }
 }

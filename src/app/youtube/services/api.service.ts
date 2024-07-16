@@ -5,6 +5,11 @@ import { map, Observable } from 'rxjs';
 import { VideoInterface } from '@/youtube/models/video.model';
 import { ItemListDto } from './api.dto';
 
+export enum SortOrderOptions {
+  DATE = 'date',
+  VIEWS = 'views',
+}
+
 @Injectable({
   providedIn: 'root',
 })

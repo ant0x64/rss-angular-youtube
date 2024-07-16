@@ -22,7 +22,7 @@ import { VideoInterface } from '@/youtube/models/video.model';
   imports: [ItemComponent, MatGridList, MatGridTile],
 })
 export class ListComponent {
-  @Input() items: VideoInterface[] = [];
+  @Input() items!: VideoInterface[];
 
   responsiveMap: { [key: string]: number } = {
     [Breakpoints.XSmall]: 1,

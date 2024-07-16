@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
 import {
-  BehaviorSubject, combineLatest, map, take,
+  AfterViewInit, Component, ElementRef, ViewChild,
+} from '@angular/core';
+import {
+  debounceTime, distinctUntilChanged, fromEvent, Observable, of, switchMap,
 } from 'rxjs';
 
 import {
@@ -17,14 +19,13 @@ import {
 } from '@angular/material/button-toggle';
 
 import { FlexModule } from '@angular/flex-layout';
-import { VideoInterface } from '@/youtube/models/video.model';
-import { ButtonComponent } from '@/shared/components/button/button.component';
-import { ApiService } from '@/youtube/services/api.service';
 
-enum SortOrderOptions {
-  DATE = 'date',
-  VIEWS = 'views',
-}
+import { Store } from '@ngrx/store';
+
+import { youtubeSearch, youtubeSetFilter, youtubeSetSortOrder } from '@/store/actions';
+import { ButtonComponent } from '@/shared/components/button/button.component';
+import { SortOrderOptions } from '@/youtube/services/api.service';
+import { selectYoutubeSortOrder } from '@/store/selectors';
 
 @Component({
   selector: 'app-search-form',
@@ -46,77 +47,43 @@ enum SortOrderOptions {
   templateUrl: './search-form.component.html',
   styleUrl: './search-form.component.scss',
 })
-export class SearchFormComponent {
+export class SearchFormComponent implements AfterViewInit {
   readonly sortOrderOptions = Object.values(SortOrderOptions);
+  isSortOrderVisible: boolean = false;
 
-  private defaultOptions = {
-    sortOrder: SortOrderOptions.DATE,
-  };
+  @ViewChild('term') term!: ElementRef<HTMLInputElement>;
 
-  private itemsSubject = new BehaviorSubject<VideoInterface[]>([]);
-  private items$ = this.itemsSubject.asObservable();
+  sortOrder$: Observable<SortOrderOptions>;
 
-  loading: boolean = false;
-  isSortOrderVisible = false;
-
-  filterTerm$ = new BehaviorSubject<string>('');
-  sortOrder$ = new BehaviorSubject<SortOrderOptions>(
-    this.defaultOptions.sortOrder,
-  );
-
-  public result$ = combineLatest({
-    items: this.items$,
-    sortOrder: this.sortOrder$,
-    filterTerm: this.filterTerm$,
-  }).pipe(
-    // eslint-disable-next-line max-len
-    map(({ items, sortOrder, filterTerm }) => this.sortItems(this.filterItems(items, filterTerm), sortOrder)),
-  );
-
-  constructor(private api: ApiService) {}
-
-  protected filterItems(items: VideoInterface[], term: string) {
-    return term.length
-      // eslint-disable-next-line max-len
-      ? items.filter((item) => item.snippet.title.toLocaleLowerCase().indexOf(term.toLocaleLowerCase()) !== -1)
-      : items;
+  constructor(private store: Store) {
+    this.sortOrder$ = this.store.select(selectYoutubeSortOrder);
   }
 
-  protected sortItems(
-    items: VideoInterface[],
-    sortOrder: SortOrderOptions,
-  ): VideoInterface[] {
-    return items.sort((a, b) => {
-      if (sortOrder === SortOrderOptions.DATE) {
-        return (
-          new Date(a.snippet.publishedAt).getTime()
-          - new Date(b.snippet.publishedAt).getTime()
-        );
+  ngAfterViewInit(): void {
+    fromEvent(this.term.nativeElement, 'input').pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap((event) => {
+        const target = event.target as HTMLInputElement;
+        return of(target.value);
+      }),
+    ).subscribe((term) => {
+      if (term.length >= 3) {
+        this.search(term);
       }
-      if (sortOrder === SortOrderOptions.VIEWS) {
-        return (
-          parseInt(a.statistics.viewCount, 10)
-          - parseInt(b.statistics.viewCount, 10)
-        );
-      }
-      return 0;
     });
   }
 
   search(term: string) {
-    this.loading = true;
-    this.api.search(term).pipe(take(1)).subscribe((items) => {
-      this.itemsSubject.next(items);
-      this.loading = false;
-    });
+    this.store.dispatch(youtubeSearch({ term }));
   }
 
-  setOrder(order: SortOrderOptions) {
-    this.sortOrder$.next(order);
+  setOrder(sortOrder: SortOrderOptions) {
+    this.store.dispatch(youtubeSetSortOrder({ sortOrder }));
   }
 
-  setFilterTerm(term: string) {
-    this.filterTerm$.next(term);
+  setFilterTerm(filter: string) {
+    this.store.dispatch(youtubeSetFilter({ filter }));
   }
 
   toggleSortOrderVisibility() {
