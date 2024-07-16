@@ -1,9 +1,4 @@
-<app-header>
-  <app-search-form/>
-</app-header>
 
-<main>
-  <app-container *ngIf="this.items$ | async; let items">
-    <app-list [items]="items"/>
-  </app-container>
-</main>
+<ng-container *ngIf="this.items$ | async; let items">
+  <app-list [items]="items"/>
+</ng-container>

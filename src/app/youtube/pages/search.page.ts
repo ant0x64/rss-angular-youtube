@@ -4,12 +4,9 @@ import { Store } from '@ngrx/store';
 import { combineLatest, map, Observable } from 'rxjs';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { ListComponent } from '@/youtube/components/list/list.component';
-import { HeaderComponent } from '@/core/components/header/header.component';
-import { SearchFormComponent } from '@/core/components/search-form/search-form.component';
 
 import { ApiService, SortOrderOptions } from '@/youtube/services/api.service';
 import { VideoInterface } from '@/youtube/models/video.model';
-import { ContainerWrapperComponent } from '@/shared/components/container/container-wrapper.component';
 
 import {
   selectYoutubeFilter,
@@ -25,9 +22,6 @@ import {
   imports: [
     NgIf,
     ListComponent,
-    HeaderComponent,
-    SearchFormComponent,
-    ContainerWrapperComponent,
     AsyncPipe,
   ],
 })
