@@ -1,0 +1,26 @@
+fieldset {
+  border: 0;
+  padding: 0;
+  position: relative;
+
+  input {
+    display: block;
+    width: 100%;
+    height: var(--mdc-filled-button-container-height);
+    box-sizing: border-box;
+    border: 0;
+    border-radius: var(--mdc-filled-button-container-shape);
+    outline: none;
+    padding: 0.25em 1em;
+  }
+
+  app-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.search-box {
+  min-height: var(--app-logo-height);
+}

@@ -1,0 +1,10 @@
+<form fxLayout="column" fxLayoutAlign="center top">
+  <div class="search-box" fxFlex="100%" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <fieldset fxFlex="100%">
+      <input matNativeControl placeholder="Search..." name="term" #term>
+      <app-button [shadowed]="true" (click)="search(term.value)">
+        <mat-icon>search</mat-icon>
+      </app-button>
+    </fieldset>
+  </div>
+</form>

@@ -1,0 +1,13 @@
+<ng-container *ngIf="data">
+  <article
+    appPublicationStatus [date]="data.snippet.publishedAt"
+    class="mat-elevation-z5"
+    >
+    <div class="image-container">
+      <img src="{{ data.snippet.thumbnails.medium.url }}" width="320" height="180" loading="lazy" />
+    </div>
+    <app-item-statistics [data]="data.statistics"></app-item-statistics>
+    <h3> {{data.snippet.title }} </h3>
+    <a mat-flat-button [routerLink]="['/detailed', data.id]">more...</a>
+  </article>
+</ng-container>

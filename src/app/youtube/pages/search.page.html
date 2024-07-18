@@ -1,0 +1,10 @@
+
+<ng-template appHeader id="search">
+  <app-button (click)="toggleSortOrderVisibility()">
+    <mat-icon>{{ !isSortOrderVisible? 'tune' : 'close' }}</mat-icon>
+  </app-button>
+</ng-template>
+<app-filter [isSortOrderVisible]="isSortOrderVisible"/>
+<ng-container *ngIf="this.items$ | async; let items">
+  <app-list [items]="items"/>
+</ng-container>

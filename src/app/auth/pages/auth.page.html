@@ -1,0 +1,16 @@
+<form [formGroup]="form" (ngSubmit)="authorize()">
+  <h1>Login</h1>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="login" type="login" required>
+    <mat-error *ngIf="form.controls['login'].invalid">Please enter a valid email</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput formControlName="password" type="password" required>
+    <mat-error *ngIf="form.controls['password'].invalid">Password is required</mat-error>
+  </mat-form-field>
+
+  <app-button type="submit" [disabled]="form.invalid">Login</app-button>
+</form>
