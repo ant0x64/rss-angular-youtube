@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-logo',
   standalone: true,
   template: `
-    <a [routerLink]="['/search']" routerLinkActive="router-link-active">
+    <a [routerLink]="['/']" routerLinkActive="router-link-active">
       <img src="assets/images/logo.svg" alt="Logo">
     </a>
   `,

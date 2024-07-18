@@ -9,6 +9,7 @@ import { ContainerWrapperComponent } from '@/shared/components/container/contain
 
 import { AuthService } from './auth/services/auth.service';
 import { setAuthorized } from './store/actions';
+import { HeaderService } from './core/services/header.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,9 @@ import { setAuthorized } from './store/actions';
     HeaderComponent,
     SearchFormComponent,
     ContainerWrapperComponent,
+  ],
+  providers: [
+    HeaderService,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

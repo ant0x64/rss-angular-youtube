@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { tap } from 'rxjs';
 
 import {
   FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators,

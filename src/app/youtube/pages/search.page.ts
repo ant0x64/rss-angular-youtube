@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest, map, Observable } from 'rxjs';
 import { AsyncPipe, NgIf } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
 import { ListComponent } from '@/youtube/components/list/list.component';
 
 import { ApiService, SortOrderOptions } from '@/youtube/services/api.service';
@@ -13,7 +14,10 @@ import {
   selectYoutubeResult,
   selectYoutubeSortOrder,
 } from '@/store/selectors';
-import { HeaderElementDirective } from '@/core/directives/header-element.directive';
+
+import { HeaderElementDirective } from '@/core/directives/header.directive';
+import { FilterComponent } from '../components/filter/filter.component';
+import { ButtonComponent } from '../../shared/components/button/button.component';
 
 @Component({
   selector: 'app-page-search',
@@ -24,10 +28,15 @@ import { HeaderElementDirective } from '@/core/directives/header-element.directi
     NgIf,
     ListComponent,
     AsyncPipe,
+    FilterComponent,
     HeaderElementDirective,
+    ButtonComponent,
+    MatIcon,
   ],
 })
 export class SearchPage {
+  isSortOrderVisible: boolean = false;
+
   protected items$: Observable<VideoInterface[]>;
 
   constructor(private cd: ChangeDetectorRef, private store: Store) {
@@ -41,6 +50,10 @@ export class SearchPage {
         return this.sortItems(this.filterItems(items, filter), sortOrder);
       }),
     );
+  }
+
+  toggleSortOrderVisibility() {
+    this.isSortOrderVisible = !this.isSortOrderVisible;
   }
 
   protected filterItems(items: VideoInterface[], term: string) {

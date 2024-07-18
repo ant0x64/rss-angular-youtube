@@ -2,7 +2,7 @@ import {
   AfterViewInit, Component, ElementRef, ViewChild,
 } from '@angular/core';
 import {
-  debounceTime, distinctUntilChanged, fromEvent, Observable, of, switchMap,
+  debounceTime, distinctUntilChanged, fromEvent, of, switchMap,
 } from 'rxjs';
 
 import {
@@ -22,10 +22,8 @@ import { FlexModule } from '@angular/flex-layout';
 
 import { Store } from '@ngrx/store';
 
-import { youtubeSearch, youtubeSetFilter, youtubeSetSortOrder } from '@/store/actions';
-import { selectYoutubeFilter, selectYoutubeSortOrder } from '@/store/selectors';
+import { youtubeSearch } from '@/store/actions';
 
-import { SortOrderOptions } from '@/youtube/services/api.service';
 import { ButtonComponent } from '@/shared/components/button/button.component';
 
 @Component({
@@ -49,19 +47,9 @@ import { ButtonComponent } from '@/shared/components/button/button.component';
   styleUrl: './search-form.component.scss',
 })
 export class SearchFormComponent implements AfterViewInit {
-  readonly sortOrderOptions = Object.values(SortOrderOptions);
-  isSortOrderVisible: boolean = false;
-
   @ViewChild('term') term!: ElementRef<HTMLInputElement>;
-  filter: string = '';
 
-  sortOrder$: Observable<SortOrderOptions>;
-  filter$: Observable<string>;
-
-  constructor(private store: Store) {
-    this.sortOrder$ = this.store.select(selectYoutubeSortOrder);
-    this.filter$ = this.store.select(selectYoutubeFilter);
-  }
+  constructor(private store: Store) {}
 
   ngAfterViewInit(): void {
     fromEvent(this.term.nativeElement, 'input').pipe(
@@ -80,17 +68,5 @@ export class SearchFormComponent implements AfterViewInit {
 
   search(term: string) {
     this.store.dispatch(youtubeSearch({ term }));
-  }
-
-  setOrder(sortOrder: SortOrderOptions) {
-    this.store.dispatch(youtubeSetSortOrder({ sortOrder }));
-  }
-
-  setFilter(filter: string) {
-    this.store.dispatch(youtubeSetFilter({ filter }));
-  }
-
-  toggleSortOrderVisibility() {
-    this.isSortOrderVisible = !this.isSortOrderVisible;
   }
 }
