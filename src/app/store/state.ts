@@ -19,9 +19,15 @@ export const videoAdapter = createEntityAdapter<VideoInterface>({
   selectId: (video) => video.id,
 });
 
+// AUTH
+
+export interface AuthState {
+  authorized: boolean;
+}
+
 // APP
 
-export interface AppState extends YoutubeState {
+export interface AppState extends YoutubeState, AuthState {
   loading: boolean;
 }
 
@@ -31,5 +37,6 @@ export const initialState: AppState = {
     sortOrder: SortOrderOptions.DATE,
     filter: '',
   },
+  authorized: false,
   loading: false,
 };

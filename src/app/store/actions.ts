@@ -1,10 +1,17 @@
 import { createAction, props } from '@ngrx/store';
 
-import { VideoInterface } from '@/youtube/models/video.model';
 import { AppState } from './state';
+
+import { VideoInterface } from '@/youtube/models/video.model';
+import { AuthInterface } from '@/auth/models/auth.model';
 
 export const enum ActionsList {
   APP_LOADING = '[APP] Loading',
+
+  LOGIN = '[AUTH] Login',
+  LOGIN_SUCCESS = '[AUTH] Login Success',
+  UNAUTHORIZED = '[AUTH] Unauthorized',
+
   YOUTUBE_SEARCH = '[YOUTUBE] Search',
   YOUTUBE_SEARCH_SUCCESS = '[YOUTUBE] Search Success',
   YOUTUBE_SET_SORT_ORDER = '[YOUTUBE] Set Sort Order',
@@ -14,6 +21,15 @@ export const enum ActionsList {
 // CORE
 
 export const appLoading = createAction(ActionsList.APP_LOADING, props<{ loading: boolean }>());
+
+// AUTH
+
+export const login = createAction(
+  ActionsList.LOGIN,
+  props<{ auth: AuthInterface }>(),
+);
+export const setAuthorized = createAction(ActionsList.LOGIN_SUCCESS);
+export const setUnauthorized = createAction(ActionsList.UNAUTHORIZED);
 
 // YOUTUBE
 

@@ -10,6 +10,10 @@ export const selectLoading = createSelector(
   (app) => app.loading,
 );
 
+// AUTH
+
+export const selectIsAuth = createSelector(selectApp, (app) => app.authorized);
+
 // YOUTUBE
 
 export const selectYoutubeResult = createSelector(

@@ -13,6 +13,18 @@ export const reducer = createReducer(
     loading,
   })),
 
+  // AUTH
+
+  on(Actions.setUnauthorized, (state): AppState => ({
+    ...state,
+    authorized: false,
+  })),
+
+  on(Actions.setAuthorized, (state): AppState => ({
+    ...state,
+    authorized: true,
+  })),
+
   // YOUTUBE
 
   on(Actions.youtubeSearchSuccess, (state, { result }): AppState => ({
