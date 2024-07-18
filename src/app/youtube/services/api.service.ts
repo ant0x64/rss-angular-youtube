@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import {
+  map, Observable, take,
+} from 'rxjs';
 
 import { VideoInterface } from '@/youtube/models/video.model';
 import { ItemListDto } from './api.dto';
@@ -21,5 +23,9 @@ export class ApiService {
     return this.http.get<ItemListDto>('/assets/response.json').pipe(
       map((result) => result.items),
     );
+  }
+
+  getById(id: VideoInterface['id']) {
+    return this.search('').pipe(take(1), map((items) => items.find((item) => item.id === id)));
   }
 }

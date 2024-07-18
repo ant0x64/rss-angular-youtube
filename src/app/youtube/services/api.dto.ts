@@ -30,6 +30,7 @@ export interface SnippetDto {
   thumbnails: {
     default: ThumbnailDto,
     medium: ThumbnailDto,
+    maxres: ThumbnailDto,
   };
   channelTitle: string;
   tags: string[];

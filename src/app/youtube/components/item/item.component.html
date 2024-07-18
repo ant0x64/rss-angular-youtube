@@ -6,21 +6,8 @@
     <div class="image-container">
       <img src="{{ data.snippet.thumbnails.medium.url }}" width="320" height="180" loading="lazy" />
     </div>
-    <div class="statistics" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-      <span fxFlex="1 2 auto">
-        <mat-icon>visibility</mat-icon> {{ data.statistics.viewCount }}
-      </span>
-      <span fxFlex="auto">
-        <mat-icon>thumb_up</mat-icon> {{ data.statistics.likeCount }}
-      </span>
-      <span fxFlex="auto">
-        <mat-icon>thumb_down</mat-icon> {{ data.statistics.dislikeCount }}
-      </span>
-      <span fxFlex="1 1 auto">
-        <mat-icon>comment</mat-icon> {{ data.statistics.commentCount }}
-      </span>
-    </div>
+    <app-item-statistics [data]="data.statistics"></app-item-statistics>
     <h3> {{data.snippet.title }} </h3>
-    <app-button>more...</app-button>
+    <a mat-flat-button [routerLink]="['/detailed', data.id]">more...</a>
   </article>
 </ng-container>

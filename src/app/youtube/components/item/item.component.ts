@@ -1,17 +1,25 @@
 import { Component, Input } from '@angular/core';
 import { NgIf } from '@angular/common';
 
-import { MatIcon } from '@angular/material/icon';
 import { FlexModule } from '@angular/flex-layout';
 
+import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 import { VideoInterface } from '@/youtube/models/video.model';
-import { ButtonComponent } from '@/shared/components/button/button.component';
 import { PublicationStatusDirective } from '@/shared/directives/publication-status.directive';
+import { YoutubeItemStatisticComponent } from './statistic.component';
 
 @Component({
   selector: 'app-item',
   standalone: true,
-  imports: [NgIf, MatIcon, FlexModule, ButtonComponent, PublicationStatusDirective],
+  imports: [
+    YoutubeItemStatisticComponent,
+    NgIf,
+    MatButtonModule,
+    FlexModule,
+    PublicationStatusDirective,
+    RouterLink,
+  ],
   templateUrl: './item.component.html',
   styleUrl: './item.component.scss',
 })

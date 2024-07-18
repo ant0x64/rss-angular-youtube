@@ -1,0 +1,49 @@
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+article {
+  border-bottom: 5px solid #000000;
+  border-radius: 5px;
+
+  background-color: var(--app-container-background);
+
+  &.status {
+    &-red {
+      border-color: var(--app-status-color-red);
+    }
+    &-yellow {
+      border-color: var(--app-status-color-yellow);
+    }
+    &-green {
+      border-color: var(--app-status-color-green);
+    }
+    &-blue {
+      border-color: var(--app-status-color-blue);
+    }
+  }
+
+  > .about-container {
+    padding: 0.75em 2em 2em;
+    flex-direction: column;
+
+    > .scroll-wrapper {
+      flex-basis: 0;
+      flex-grow: 1;
+      overflow-y: auto;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    time {
+      font-style: italic;
+    }
+
+    app-item-statistics {
+      margin-top: auto;
+    }
+  }
+}

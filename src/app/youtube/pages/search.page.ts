@@ -13,6 +13,7 @@ import {
   selectYoutubeResult,
   selectYoutubeSortOrder,
 } from '@/store/selectors';
+import { HeaderElementDirective } from '@/core/directives/header-element.directive';
 
 @Component({
   selector: 'app-page-search',
@@ -23,6 +24,7 @@ import {
     NgIf,
     ListComponent,
     AsyncPipe,
+    HeaderElementDirective,
   ],
 })
 export class SearchPage {

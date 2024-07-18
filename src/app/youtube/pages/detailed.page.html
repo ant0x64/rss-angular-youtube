@@ -1,0 +1,27 @@
+<ng-container *ngIf="data">
+  <article
+    appPublicationStatus [date]="data.snippet.publishedAt"
+    fxLayout="row" fxLayoutAlign="start normal"fxLayoutGap="0"
+    fxLayout.lt-md="column"
+    class="mat-elevation-z5"
+    >
+    <div class="image-container" fxFlex="60%">
+      <img src="{{ data.snippet.thumbnails.maxres.url }}" width="{{ data.snippet.thumbnails.maxres.width }}"
+        height="{{ data.snippet.thumbnails.maxres.height }}" />
+    </div>
+
+    <div class="about-container" fxFlex fxLayout.gt-sm="column">
+      <div class="scroll-wrapper">
+        <h1>{{ data.snippet.title }}</h1>
+        <time>{{ data.snippet.publishedAt | date: 'fullDate' }}</time>
+        <div class="desc">
+          <p>
+            <strong>Description</strong> <br />
+            {{ data.snippet.description }}
+          </p>
+        </div>
+        <app-item-statistics [data]="data.statistics"></app-item-statistics>
+      </div>
+    </div>
+  </article>
+</ng-container>
